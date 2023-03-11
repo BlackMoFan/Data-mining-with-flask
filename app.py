@@ -42,23 +42,23 @@ def predict():
 
 @app.route('/Act0LoadData/')
 def activity0():
-    return render_template('Activity0.html')
+    return render_template('activity0.html')
 
 @app.route('/Act1KNN/')
 def activity1():
-    return render_template('Activity1.html')
+    return render_template('activity1.html')
 
 @app.route('/Act2KMeansClustering/')
 def activity2():
-    return render_template('Activity2.html')
+    return render_template('activity2.html')
 
 @app.route('/Act3Association/')
 def activity3():
-    return render_template('Activity3.html')
+    return render_template('activity3.html')
 
 @app.route('/Act4Nbayes/')
 def activity4():
-    return render_template('Activity4.html')
+    return render_template('activity4.html')
 
 @app.route('/about/')
 def about():
