@@ -11,7 +11,11 @@ from flask import *
 import os
 from werkzeug.utils import secure_filename
  
+# local
 UPLOAD_FOLDER = os.path.join('staticFiles', 'uploads')
+
+# in pythonanywhere
+#UPLOAD_FOLDER = "/home/Inglis/Data-mining-with-flask/staticFiles/uploads"
 
 # Define allowed files
 ALLOWED_EXTENSIONS = {'csv'}
@@ -27,7 +31,10 @@ app.secret_key = 'This is your secret key to utilize session in Flask'
 def uploadFile():
     if request.method == 'POST':
         if 'file' not in request.files:
+            # local
             session['uploaded_data_file_path'] = "staticFiles/excelTemplates/Iris.csv"
+            # in pythonanywhere
+            #session['uploaded_data_file_path'] = "/home/Inglis/Data-mining-with-flask/staticFiles/excelTemplates/Iris.csv"
         else:
             # upload file flask
             f = request.files.get('file')
