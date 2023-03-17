@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{% block title %} Activity 0:  Load Data{% endblock %}</h1>
+
+<p style="color:green;"> File uploaded successfully!! </p>
+<form action="{{ url_for('showData')}}">
+    <input type="submit" class="btns" value="Show CSV"/>
+</form>
+
+{% endblock %}
+

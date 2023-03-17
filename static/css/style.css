@@ -5,3 +5,8 @@ text-align: center;
 padding: 10px;
 }
 
+.btns {
+    border: 2px solid brown;
+    border-radius: 0.5rem;
+    margin: 1rem;
+}

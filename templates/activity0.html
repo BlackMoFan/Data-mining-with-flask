@@ -2,5 +2,15 @@
 
 {% block content %}
 <h1>{% block title %} Activity 0:  Load Data{% endblock %}</h1>
+
+<form method="POST" enctype="multipart/form-data" action="{{ url_for('uploadFile')}}">   
+    <input type="file" class="btns" name="file" accept=".csv" >
+    <input type="submit" class="btns" value="Upload"> 
+</form>
+
+<form method="POST" enctype="multipart/form-data" action="{{ url_for('uploadFile')}}">   
+    <button type="submit" class="btns" name="irisTemplate" value="Use Iris dataset">Or use Iris dataset</button>
+</form>
+
 {% endblock %}
 

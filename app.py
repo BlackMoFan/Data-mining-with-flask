@@ -2,7 +2,62 @@ from flask import Flask, render_template, request, jsonify, Response
 #import pandas as pd
 import numpy as np
 
+#------------------------------------
+# new from https://www.geeksforgeeks.org/uploading-and-reading-a-csv-file-in-flask/
+from distutils.log import debug
+from fileinput import filename
+import pandas as pd
+from flask import *
+import os
+from werkzeug.utils import secure_filename
+ 
+UPLOAD_FOLDER = os.path.join('staticFiles', 'uploads')
+
+# Define allowed files
+ALLOWED_EXTENSIONS = {'csv'}
+
 app = Flask(__name__)
+
+# Configure upload file path flask
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+ 
+app.secret_key = 'This is your secret key to utilize session in Flask'
+
+@app.route('/Act0LoadData/Upload/', methods=['GET', 'POST'])
+def uploadFile():
+    if request.method == 'POST':
+        if 'file' not in request.files:
+            session['uploaded_data_file_path'] = "staticFiles/excelTemplates/Iris.csv"
+        else:
+            # upload file flask
+            f = request.files.get('file')
+    
+            # Extracting uploaded file name
+            data_filename = secure_filename(f.filename)
+    
+            f.save(os.path.join(app.config['UPLOAD_FOLDER'], data_filename))
+    
+            session['uploaded_data_file_path'] = os.path.join(app.config['UPLOAD_FOLDER'], data_filename)
+        return render_template('activity0FileUploaded.html')
+    return render_template("activity0.html")
+ 
+ 
+@app.route('/Act0LoadData/show_data/')
+def showData():
+    # Uploaded File Path
+    data_file_path = session.get('uploaded_data_file_path', None)
+    # read csv
+    uploaded_df = pd.read_csv(data_file_path, encoding='unicode_escape')
+    # Converting to html Table
+    uploaded_df_html = uploaded_df.to_html()
+    return render_template('activity0ShowData.html', data_var=uploaded_df_html)
+ 
+ 
+if __name__ == '__main__':
+    app.run(debug=True)
+#------------------------------------
+
+# app = Flask(__name__)
 
 @app.route('/')
 def index():
